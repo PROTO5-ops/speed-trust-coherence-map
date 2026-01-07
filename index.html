@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Speed–Trust–Coherence Map</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0A0A0A;
+            --text-primary: #EDEBE7;
+            --text-secondary: #B9B6AF;
+            --divider: #2A2A2A;
+            --accent: #B85C3A;
+            --notebook-line: rgba(237, 235, 231, 0.04);
+        }
+
+        * { box-sizing: border-box; }
+        body {
+            background-color: var(--bg);
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            -webkit-font-smoothing: antialiased;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 700px;
+            width: 100%;
+            padding: 140px 24px;
+        }
+
+        /* Typography */
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 400;
+            font-size: 3rem;
+            margin: 0 0 20px 0;
+            letter-spacing: -0.01em;
+        }
+
+        .logline {
+            font-size: 1.15rem;
+            color: var(--text-secondary);
+            margin-bottom: 120px;
+        }
+
+        .section-header {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--accent);
+            margin-bottom: 40px;
+            display: block;
+        }
+
+        /* Thinking Section & Notebook Overlay */
+        .thinking-wrapper {
+            position: relative;
+            margin-bottom: 120px;
+            padding: 60px 0;
+            /* Thin horizontal lines overlay */
+            background-image: linear-gradient(var(--notebook-line) 1px, transparent 1px);
+            background-size: 100% 28px;
+        }
+
+        .editorial-copy {
+            font-size: 1.1rem;
+            max-width: 640px;
+            margin-bottom: 40px;
+            white-space: pre-line; /* Respects exact copy formatting */
+        }
+
+        /* Evolution Diagram */
+        .diagram {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 80px 0;
+            padding: 20px 0;
+        }
+
+        .diag-box { text-align: center; }
+        .triangle-path {
+            fill: none;
+            stroke: var(--accent);
+            stroke-width: 1.2;
+        }
+
+        .evolution-graphic {
+            width: 80px;
+            height: 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            opacity: 0.8;
+        }
+        .evolution-glyph {
+            width: 3px;
+            background: var(--accent);
+        }
+
+        .diag-label {
+            margin-top: 15px;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+        }
+
+        .caption {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            margin-top: -20px;
+        }
+
+        /* Sliders */
+        .slider-stack { margin-top: 120px; }
+        .slider-group { margin-bottom: 80px; }
+        
+        .slider-q {
+            display: block;
+            font-size: 1.05rem;
+            font-weight: 500;
+            margin-bottom: 24px;
+        }
+
+        input[type="range"] {
+            -webkit-appearance: none;
+            width: 100%;
+            background: transparent;
+            cursor: pointer;
+        }
+        input[type="range"]::-webkit-slider-runnable-track {
+            height: 1px;
+            background: var(--divider);
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 14px;
+            width: 14px;
+            background: var(--accent);
+            margin-top: -6.5px;
+            border-radius: 0;
+        }
+
+        .anchors {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+        }
+        .anchor-item {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            width: 22%;
+            line-height: 1.3;
+        }
+
+        /* Button */
+        .action {
+            display: flex;
+            justify-content: center;
+            margin: 100px 0;
+        }
+        button {
+            background: var(--accent);
+            color: var(--text-primary);
+            border: none;
+            padding: 16px 36px;
+            font-family: inherit;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: opacity 0.3s ease;
+        }
+        button:hover { opacity: 0.85; }
+
+        /* Output */
+        #reflection-view {
+            display: none;
+            border-top: 1px solid var(--divider);
+            padding-top: 100px;
+            margin-bottom: 100px;
+        }
+
+        .viz-box {
+            position: relative;
+            width: 320px;
+            height: 280px;
+            margin: 0 auto 60px auto;
+        }
+        .v-label {
+            position: absolute;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--text-secondary);
+        }
+        .v-speed { top: -25px; left: 50%; transform: translateX(-50%); }
+        .v-trust { bottom: -10px; left: -20px; }
+        .v-coherence { bottom: -10px; right: -20px; }
+
+        #marker {
+            width: 8px;
+            height: 8px;
+            background: var(--accent);
+            position: absolute;
+            z-index: 5;
+        }
+
+        .assessment-block {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.45rem;
+            line-height: 1.6;
+            margin-bottom: 40px;
+        }
+        .design-q {
+            font-style: italic;
+            color: var(--text-secondary);
+            border-left: 1px solid var(--accent);
+            padding-left: 24px;
+            font-size: 1.1rem;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 80px;
+            border-top: 1px solid var(--divider);
+            padding: 60px 0 100px 0;
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+        }
+        footer a { color: inherit; text-decoration: none; border-bottom: 1px solid transparent; transition: 0.2s; }
+        footer a:hover { border-bottom: 1px solid var(--text-secondary); }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>The Speed–Trust–Coherence Map</h1>
+        <div class="logline">A one-minute orientation tool for creative decisions in the age of intelligent abundance.</div>
+    </header>
+
+    <div class="thinking-wrapper">
+        <span class="section-header">Thinking</span>
+        <div class="editorial-copy">Over the last few decades, with the advent of digital production, most creative decisions were shaped by conscious scarcity. Time, cost, and execution quality set hard limits on what was physically possible — even as digital tools began to introduce new forms of technical abundance.
+
+        In response, frameworks like Cheap · Fast · Good emerged — less as fixed rules of production, and more as disciplines on expectation.
+
+        In the age of synthetic media, those physical limits collapse again — more completely. That is the technical reality we are now confronting.
+
+        Each technological shift creates a new form of abundance, and each abundance requires a new form of creative discipline. Production is now fast, inexpensive, and technically polished by default.
+
+        What replaces scarcity is a quieter problem: abundance without orientation. When everything is technically possible, decisions don’t fail at execution — they fail at judgment.</div>
+
+        <div class="diagram">
+            <div class="diag-box">
+                <svg width="70" height="60"><polygon points="35,5 65,55 5,55" class="triangle-path" /></svg>
+                <div class="diag-label">Cheap · Fast · Good</div>
+            </div>
+            <div class="evolution-graphic">
+                <div class="evolution-glyph" style="height: 20%;"></div>
+                <div class="evolution-glyph" style="height: 40%;"></div>
+                <div class="evolution-glyph" style="height: 70%;"></div>
+                <div class="evolution-glyph" style="height: 100%;"></div>
+            </div>
+            <div class="diag-box">
+                <svg width="100" height="85"><polygon points="50,5 95,80 5,80" class="triangle-path" style="stroke-width: 2;" /></svg>
+                <div class="diag-label">Speed · Trust · Coherence</div>
+            </div>
+        </div>
+        <div class="caption">From production scarcity to decision abundance.</div>
+    </div>
+
+    <section>
+        <div class="editorial-copy">In an environment of abundance, three constraints determine whether work actually holds: Speed, Trust, and Coherence. These are not trade-offs in the old sense. They are pressures that must be actively held if abundance is to produce meaning instead of noise.
+
+        This is no longer a scarcity triangle. Unlike Cheap · Fast · Good, this map does not show what’s impossible. It shows what requires care when production is abundant.
+
+        We are now in the age of intelligent abundance.</div>
+        
+        <span class="section-header" style="margin-top: 80px;">How it Works</span>
+        <div class="editorial-copy" style="font-size: 1rem;">Adjust six sliders to reflect the current conditions of a project. The map shows which constraint is currently dominant, followed by a short reflection and a design question to support clearer discussion.</div>
+    </section>
+
+    <main class="slider-stack">
+        <div class="slider-group">
+            <span class="slider-q">How fast does this decision need to move?</span>
+            <input type="range" id="s1" min="0" max="3" value="0">
+            <div class="anchors">
+                <div class="anchor-item">Deliberate — Time exists for discussion</div>
+                <div class="anchor-item">Responsive — Choices are revisitable</div>
+                <div class="anchor-item">Compressed — Decisions must land quickly</div>
+                <div class="anchor-item">Reactive — Speed overrides reflection</div>
+            </div>
+        </div>
+        <div class="slider-group">
+            <span class="slider-q">How much of the work is generated or automated?</span>
+            <input type="range" id="s2" min="0" max="3" value="0">
+            <div class="anchors">
+                <div class="anchor-item">Human-led — AI used sparingly</div>
+                <div class="anchor-item">Assisted — AI supports drafts</div>
+                <div class="anchor-item">Synthetic-heavy — Majority is AI</div>
+                <div class="anchor-item">Fully automated — Human as supervisor</div>
+            </div>
+        </div>
+        <div class="slider-group">
+            <span class="slider-q">What grounds this work in lived or human context?</span>
+            <input type="range" id="s3" min="0" max="3" value="0">
+            <div class="anchors">
+                <div class="anchor-item">Abstract — No direct human reference</div>
+                <div class="anchor-item">Referential — Draws from precedent</div>
+                <div class="anchor-item">Embedded — Informed by research</div>
+                <div class="anchor-item">Originating — Emerges from human context</div>
+            </div>
+        </div>
+        <div class="slider-group">
+            <span class="slider-q">How much does perceived authenticity matter here?</span>
+            <input type="range" id="s4" min="0" max="3" value="0">
+            <div class="anchors">
+                <div class="anchor-item">Low stakes — Little reputational risk</div>
+                <div class="anchor-item">Contextual — Some audiences will care</div>
+                <div class="anchor-item">High sensitivity — Trust is fragile</div>
+                <div class="anchor-item">Critical — Credibility is central</div>
+            </div>
+        </div>
+        <div class="slider-group">
+            <span class="slider-q">Is there a clear reason this work exists?</span>
+            <input type="range" id="s5" min="0" max="3" value="0">
+            <div class="anchors">
+                <div class="anchor-item">Fragmented — Isolated outputs</div>
+                <div class="anchor-item">Implied — Rationale exists</div>
+                <div class="anchor-item">Articulated — Clear internal logic</div>
+                <div class="anchor-item">Compelling — Strong shared narrative</div>
+            </div>
+        </div>
+        <div class="slider-group">
+            <span class="slider-q">How stable does this decision feel?</span>
+            <input type="range" id="s6" min="0" max="3" value="0">
+            <div class="anchors">
+                <div class="anchor-item">Settled — Direction unlikely to change</div>
+                <div class="anchor-item">Flexible — Adjustments expected</div>
+                <div class="anchor-item">Uncertain — Revisited repeatedly</div>
+                <div class="anchor-item">Volatile — No real decision landed</div>
+            </div>
+        </div>
+
+        <div class="action">
+            <button onclick="reveal()">View Reflection</button>
+        </div>
+    </main>
+
+    <div id="reflection-view">
+        <div class="viz-box">
+            <span class="v-label v-speed">Speed</span>
+            <span class="v-label v-trust">Trust</span>
+            <span class="v-label v-coherence">Coherence</span>
+            <svg width="320" height="280" viewBox="0 0 320 280">
+                <polygon points="160,20 300,260 20,260" class="triangle-path" />
+            </svg>
+            <div id="marker"></div>
+        </div>
+        <div id="assessment" class="assessment-block"></div>
+        <div id="question" class="design-q"></div>
+    </div>
+
+    <footer>
+        Speed-Trust-Coherence Map<br>
+        Edition · Jan 2026<br>
+        Created by Gary Yong<br>
+        LinkedIn: <a href="https://www.linkedin.com/in/garyyong-ai-strategist" target="_blank">@garyyong-ai-strategist</a><br>
+        Artist Venture Productions · <a href="https://www.artistventure.productions/" target="_blank">Home</a><br>
+        Strategic systems for creative leaders navigating synthetic media
+    </footer>
+</div>
+
+<script>
+    function reveal() {
+        const s1 = parseInt(document.getElementById('s1').value);
+        const s2 = parseInt(document.getElementById('s2').value);
+        const s3 = parseInt(document.getElementById('s3').value);
+        const s4 = parseInt(document.getElementById('s4').value);
+        const s5 = parseInt(document.getElementById('s5').value);
+        const s6 = parseInt(document.getElementById('s6').value);
+
+        // Map weights (0-6 scale)
+        const wSpeed = s1 + s2;
+        const wTrust = s3 + s4;
+        const wCoherence = s5 + (3 - s6); 
+
+        const total = (wSpeed + wTrust + wCoherence) || 1;
+
+        // Triangle points: Apex(160, 20), BottomLeft(20, 260), BottomRight(300, 260)
+        const x = (wSpeed * 160 + wTrust * 20 + wCoherence * 300) / total;
+        const y = (wSpeed * 20 + wTrust * 260 + wCoherence * 260) / total;
+
+        const marker = document.getElementById('marker');
+        marker.style.left = (x - 4) + 'px';
+        marker.style.top = (y - 4) + 'px';
+
+        // Assessment Logic
+        const weights = [
+            { name: 'speed', val: wSpeed },
+            { name: 'trust', val: wTrust },
+            { name: 'coherence', val: wCoherence }
+        ];
+        weights.sort((a,b) => b.val - a.val);
+
+        const dominant = weights[0].name;
+        const fragile = weights[2].name;
+        const middle = weights[1].name;
+
+        let text = "";
+        if (dominant === 'speed') {
+            text = `This configuration is driven by speed, with ${middle} acting as a secondary pressure. In this context, ${fragile} becomes the fragile constraint — it will hold only if actively maintained.`;
+        } else if (dominant === 'trust') {
+            text = `This decision prioritises trust and ${middle}. Speed is not blocked, but it becomes the limiting factor if urgency increases later.`;
+        } else {
+            text = `This orientation is driven by coherence. While trust and speed are present, ${fragile} remains the pressure point that requires the most deliberate stewardship to prevent erosion.`;
+        }
+
+        document.getElementById('assessment').innerText = text;
+        document.getElementById('question').innerText = "What is the smallest move that would protect the fragile constraint without undermining the dominant one?";
+        
+        const view = document.getElementById('reflection-view');
+        view.style.display = 'block';
+        view.scrollIntoView({ behavior: 'smooth' });
+    }
+</script>
+
+</body>
+</html>
