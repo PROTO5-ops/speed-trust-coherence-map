@@ -54,7 +54,7 @@
         .logline {
             font-size: 1.15rem;
             color: var(--text-secondary);
-            margin-bottom: 40px;
+            margin-bottom: 60px; /* Increased spacing */
             font-style: italic;
         }
 
@@ -65,7 +65,7 @@
             text-transform: uppercase;
             letter-spacing: 0.2em;
             color: var(--accent);
-            margin-bottom: 40px;
+            margin-bottom: 60px; /* Increased spacing */
             line-height: 1.6;
         }
 
@@ -76,7 +76,7 @@
             text-transform: uppercase;
             letter-spacing: 0.25em;
             color: var(--accent);
-            margin: 40px 0 40px 0;
+            margin: 60px 0 40px 0;
             display: block;
         }
 
@@ -85,20 +85,20 @@
             width: 100%;
             background-image: linear-gradient(var(--notebook-line) 1px, transparent 1px);
             background-size: 100% 28px;
-            padding: 10px 0;
-            margin-bottom: 20px;
+            padding: 20px 0;
+            margin-bottom: 40px;
         }
 
         .editorial-copy {
             font-size: 1.1rem;
-            margin-bottom: 20px;
+            margin-bottom: 40px; /* Increased margin between text blocks */
             white-space: pre-line;
         }
 
-        /* Adjusted Diagram Margin */
+        /* Enhanced Diagram Spacing */
         .asset-wrap {
             text-align: center;
-            margin: 60px 0; /* Added breathing room now that image scarcity is removed */
+            margin: 100px 0; /* Significant breathing room around image */
         }
         .asset-wrap img {
             max-width: 100%;
@@ -107,26 +107,25 @@
             margin: 0 auto;
         }
         .asset-caption {
-            margin-top: 12px; /* Small fixed gap for legibility */
+            margin-top: 16px;
             font-size: 0.95rem;
             color: var(--text-secondary);
         }
 
         .how-it-works-text {
-            margin-bottom: 100px;
+            margin-bottom: 120px; /* More space before sliders */
         }
 
-        /* Slider Headers with Line Break */
         .slider-header {
-            margin-bottom: 24px;
+            margin-bottom: 32px;
         }
         .cat-label {
             font-size: 0.75rem;
             text-transform: uppercase;
             letter-spacing: 0.3em;
             color: var(--text-secondary);
-            display: block; /* Forced to its own line */
-            margin-bottom: 8px;
+            display: block;
+            margin-bottom: 12px;
         }
         .slider-q {
             font-size: 1.05rem;
@@ -135,7 +134,7 @@
             display: block;
         }
 
-        .slider-group { margin-bottom: 80px; }
+        .slider-group { margin-bottom: 100px; } /* More space between categories */
 
         input[type="range"] {
             -webkit-appearance: none;
@@ -155,40 +154,51 @@
         .anchors {
             display: flex;
             justify-content: space-between;
-            margin-top: 15px;
+            margin-top: 20px;
         }
         .anchor-item {
             font-size: 0.75rem;
             color: var(--text-secondary);
             width: 22%;
-            line-height: 1.3;
+            line-height: 1.4;
         }
 
+        /* Button and Divider Spacing Fix */
+        .action {
+            display: flex;
+            justify-content: center; /* Ensures centering */
+            align-items: center;
+            width: 100%;
+            margin: 120px 0 140px 0; /* Huge margin-bottom to space from divider */
+        }
         button {
             background: transparent;
             color: var(--text-primary);
             border: 1px solid var(--accent);
-            padding: 18px 40px;
+            padding: 20px 50px;
             font-family: inherit;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             font-weight: 500;
             cursor: pointer;
             transition: all 0.3s ease;
+            display: inline-block;
+            margin: 0 auto; /* Redundancy for centering */
         }
         button:hover { background: var(--accent); color: var(--text-primary); }
 
+        /* Output Spacing */
         #reflection {
             display: none;
             border-top: 1px solid var(--divider);
-            padding-top: 100px;
-            margin-bottom: 120px;
+            padding-top: 140px; /* Spacing after the divider line */
+            margin-bottom: 160px;
         }
 
         .viz-container {
             position: relative;
             width: 320px;
             height: 280px;
-            margin: 0 auto 80px auto;
+            margin: 0 auto 100px auto;
         }
         .v-label {
             position: absolute;
@@ -204,23 +214,23 @@
 
         .assessment-text {
             font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
-            line-height: 1.6;
-            margin-bottom: 48px;
+            font-size: 1.55rem;
+            line-height: 1.7;
+            margin-bottom: 60px;
         }
         .prompt-q {
             font-style: italic;
             color: var(--text-secondary);
             border-left: 1px solid var(--accent);
-            padding-left: 24px;
-            font-size: 1.15rem;
-            max-width: 600px;
+            padding-left: 32px;
+            font-size: 1.2rem;
+            max-width: 650px;
         }
 
         footer {
-            margin-top: 100px;
+            margin-top: 160px;
             border-top: 1px solid var(--divider);
-            padding: 60px 0 100px 0;
+            padding: 80px 0 120px 0;
             color: var(--text-secondary);
             font-size: 0.85rem;
         }
@@ -257,7 +267,9 @@
             <div class="asset-caption">From disciplined production scarcity to responsible synthetic abundance.</div>
         </div>
 
-        <div class="editorial-copy">In an environment of abundance, three constraints determine whether work actually holds: <strong>Speed, Trust, and Coherence</strong>. These are not trade-offs in the old sense. They are pressures that must be actively held if abundance is to produce meaning instead of noise.
+        <div class="editorial-copy">In an environment of abundance, three constraints determine whether work actually holds: <strong>Speed, Trust, and Coherence</strong>. 
+            
+        These are not trade-offs in the old sense. They are pressures that must be actively held if abundance is to produce meaning instead of noise.
 
         This is no longer a scarcity triangle. Unlike Cheap · Fast · Good, this map does not show what’s impossible. It shows what requires attention and care when production is abundant.
 
