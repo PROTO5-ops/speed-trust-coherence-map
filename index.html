@@ -59,54 +59,50 @@
             font-style: italic;
         }
 
+        /* Byline: Matching previous header style but slightly larger */
         .byline {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.1rem;
-            color: var(--text-secondary);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--accent);
             margin-bottom: 60px;
-            line-height: 1.4;
+            line-height: 1.6;
         }
 
+        /* Section Headers: Larger All-Caps Terracotta */
         .section-anchor {
-            font-family: 'Playfair Display', serif;
-            font-size: 2rem;
-            font-weight: 400;
-            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.25em;
+            color: var(--accent);
             margin: 80px 0 40px 0;
             display: block;
         }
 
-        /* Thinking Section & Notebook Overlay */
+        /* Thinking Section: Ruled lines constrained to container */
         .thinking-area {
             position: relative;
-            width: 100vw;
-            left: 50%;
-            right: 50%;
-            margin-left: -50vw;
-            margin-right: -50vw;
+            width: 100%;
             background-image: linear-gradient(var(--notebook-line) 1px, transparent 1px);
             background-size: 100% 28px;
-            display: flex;
-            justify-content: center;
-            padding: 20px 0 80px 0;
-        }
-
-        .thinking-content {
-            max-width: 800px;
-            width: 100%;
-            padding: 0 40px;
+            padding: 20px 0 60px 0;
+            margin-bottom: 40px;
         }
 
         .editorial-copy {
             font-size: 1.1rem;
-            margin-bottom: 60px;
+            margin-bottom: 40px;
             white-space: pre-line;
         }
 
         /* Evolution Diagram Asset */
         .asset-wrap {
             text-align: center;
-            margin: 80px 0;
+            margin: 40px 0 20px 0; /* Reduced padding above and below */
         }
         .asset-wrap img {
             max-width: 100%;
@@ -115,7 +111,7 @@
             margin: 0 auto;
         }
         .asset-caption {
-            margin-top: 24px;
+            margin-top: 12px; /* Caption sits directly below */
             font-size: 0.95rem;
             color: var(--text-secondary);
         }
@@ -164,7 +160,7 @@
         .action {
             display: flex;
             justify-content: center;
-            margin: 120px 0;
+            margin: 100px 0;
         }
         button {
             background: var(--accent);
@@ -252,34 +248,32 @@
     </header>
 
     <div class="thinking-area">
-        <div class="thinking-content">
-            <span class="section-anchor">Thinking</span>
-            <div class="editorial-copy">Over the last few decades, with the advent of digital production, most creative decisions were shaped by conscious <em>scarcity</em>. Time, cost, and execution quality set hard limits on what was physically possible — even as digital tools began to introduce new forms of technical abundance.
+        <span class="section-anchor">Thinking</span>
+        <div class="editorial-copy">Over the last few decades, with the advent of digital production, most creative decisions were shaped by conscious <em>scarcity</em>. Time, cost, and execution quality set hard limits on what was physically possible — even as digital tools began to introduce new forms of technical abundance.
 
-            In response, frameworks like <strong>Cheap · Fast · Good</strong> emerged — less as fixed rules of production, and more as disciplines on expectation.
+        In response, frameworks like <strong>Cheap · Fast · Good</strong> emerged — less as fixed rules of production, and more as disciplines on expectation.
 
-            In the age of synthetic media, those physical limits collapse again — more completely. That is the technical reality we are now confronting.
+        In the age of synthetic media, those physical limits collapse again — more completely. That is the technical reality we are now confronting.
 
-            Each technological shift creates a new form of abundance, and each abundance requires a new form of creative discipline. Production is now fast, inexpensive, and technically polished by default.
+        Each technological shift creates a new form of abundance, and each abundance requires a new form of creative discipline. Production is now fast, inexpensive, and technically polished by default.
 
-            What replaces scarcity is a quieter problem: abundance without orientation. When everything is technically possible, decisions don’t fail at execution — they fail at <em>judgment</em>.</div>
+        What replaces scarcity is a quieter problem: abundance without orientation. When everything is technically possible, decisions don’t fail at execution — they fail at <em>judgment</em>.</div>
 
-            <div class="asset-wrap">
-                <img src="assets/images/evolution_diagram.png" alt="Diagram showing the conceptual shift from the classic Cheap-Fast-Good triangle of scarcity to the Speed-Trust-Coherence triangle of abundance">
-                <div class="asset-caption">From disciplined production scarcity to responsible synthetic abundance.</div>
-            </div>
-
-            <div class="editorial-copy">In an environment of abundance, three constraints determine whether work actually holds: <strong>Speed, Trust, and Coherence</strong>. These are not trade-offs in the old sense. They are pressures that must be actively held if abundance is to produce meaning instead of noise.
-
-            This is no longer a scarcity triangle. Unlike Cheap · Fast · Good, this map does not show what’s impossible. It shows what requires <em>attention and care</em> when production is abundant.
-
-            We are now in the age of intelligent abundance.</div>
+        <div class="asset-wrap">
+            <img src="assets/images/evolution_diagram.png" alt="Evolution Diagram">
+            <div class="asset-caption">From disciplined production scarcity to responsible synthetic abundance.</div>
         </div>
+
+        <div class="editorial-copy">In an environment of abundance, three constraints determine whether work actually holds: <strong>Speed, Trust, and Coherence</strong>. These are not trade-offs in the old sense. They are pressures that must be actively held if abundance is to produce meaning instead of noise.
+
+        This is no longer a scarcity triangle. Unlike Cheap · Fast · Good, this map does not show what’s impossible. It shows what requires <em>attention and care</em> when production is abundant.
+
+        We are now in the age of intelligent abundance.</div>
     </div>
 
     <section>
         <span class="section-anchor">How it works</span>
-        <div class="editorial-copy" style="font-size: 1rem;">Adjust six sliders to reflect the current conditions of a project. The map shows which constraint is currently dominant, followed by a short reflection and a design question that can be used as a prompt to support clearer discussion.</div>
+        <div class="editorial-copy" style="font-size: 1.05rem;">Adjust six sliders to reflect the current conditions of a project. The map shows which constraint is currently dominant, followed by a short reflection and a design question that can be used as a prompt to support clearer discussion.</div>
     </section>
 
     <main>
@@ -288,7 +282,7 @@
             <input type="range" id="s1" min="0" max="3" value="0">
             <div class="anchors">
                 <div class="anchor-item">Deliberate — Time exists for discussion</div>
-                <div class="anchor-item">Responsive — Choices are still revisitable</div>
+                <div class="anchor-item">Responsive — Choices are revisitable</div>
                 <div class="anchor-item">Compressed — Decisions must land quickly</div>
                 <div class="anchor-item">Reactive — Speed overrides reflection</div>
             </div>
@@ -345,7 +339,7 @@
                 <div class="anchor-item">Settled — Direction unlikely to change</div>
                 <div class="anchor-item">Flexible — Adjustments expected</div>
                 <div class="anchor-item">Uncertain — Revisited repeatedly</div>
-                <div class="anchor-item">Volatile — No real decision has landed</div>
+                <div class="anchor-item">Volatile — No real decision landed</div>
             </div>
         </div>
 
@@ -361,9 +355,9 @@
             <span class="v-label v-coherence">Coherence</span>
             <svg id="svg-map" width="320" height="280" viewBox="0 0 320 280">
                 <polygon points="160,20 300,260 20,260" fill="none" stroke="#B85C3A" stroke-width="1.2" />
-                <line id="line-speed" class="tension-line" />
-                <line id="line-trust" class="tension-line" />
-                <line id="line-coherence" class="tension-line" />
+                <line id="line-speed" />
+                <line id="line-trust" />
+                <line id="line-coherence" />
             </svg>
             <div id="marker"></div>
         </div>
@@ -399,7 +393,7 @@
             dominant_insight: ["This decision is being made in relation to a larger system.", "The work is being asked to accumulate meaning over time.", "Continuity is doing more work here than novelty.", "This choice will be read as precedent, not an isolated act.", "The integrity of the system matters more than the impact of this moment.", "The long arc is shaping what can happen now."],
             supporting_tension: { speed: ["Acceleration risks outrunning shared understanding.", "Moving quickly may fracture continuity.", "Pacing matters more than velocity here.", "Urgency could introduce inconsistency."], trust: ["Trust depends on consistency rather than explanation.", "Credibility accrues through alignment, not reassurance.", "Small deviations may weaken the overall signal.", "Reliability is being inferred across time."] },
             fragile_warning: { speed: ["Speed becomes the fragile constraint — urgency may erode alignment.", "Momentum could introduce breaks that are difficult to reconcile later."], trust: ["Trust becomes the fragile constraint if coherence feels forced rather than lived.", "Without continuity, consistency may appear performative."] },
-            design_question: { coherence: ["What does this need to align with to remain intact?", "What would make this feel continuous rather than clever?", "What pattern does this reinforce over time?"], speed: ["What pace preserves continuity without stalling progress?", "What would be difficult to undo if we move too quickly?"], trust: ["What signal would make this feel dependable rather than justified?", "What consistency will be noticed more than this single decision?"] }
+            design_question: { coherence: ["What does this need to align with to remain intact?", "What would make this feel continuous rather than clever?", "What pattern does this reinforce over time?"], speed: ["What would be difficult to undo if we move too quickly?", "What pace preserves continuity without stalling progress?"], trust: ["What signal would make this feel dependable rather than justified?", "What consistency will be noticed more than this single decision?"] }
         }
     };
 
@@ -418,7 +412,6 @@
         const wC = v[4] + (3 - v[5]);
         const sum = (wS + wT + wC) || 1;
 
-        // Apex(160,20), BL(20,260), BR(300,260)
         const x = (wS * 160 + wT * 20 + wC * 300) / sum;
         const y = (wS * 20 + wT * 260 + wC * 260) / sum;
 
@@ -433,27 +426,25 @@
 
         const dom = dists[0].id, sec = dists[1].id, fra = dists[2].id;
 
-        // Visualize Tension Lines
         dists.forEach((p, i) => {
             const l = document.getElementById('line-' + p.id);
             l.setAttribute('x1', x); l.setAttribute('y1', y);
             l.setAttribute('x2', p.x); l.setAttribute('y2', p.y);
             l.setAttribute('stroke', '#B85C3A');
             l.setAttribute('stroke-width', i === 0 ? 3 : (i === 1 ? 1.5 : 0.8));
-            l.setAttribute('opacity', i === 2 ? 0.7 : 1);
+            l.setAttribute('opacity', i === 2 ? 0.65 : 1);
         });
 
-        // Assemble Reflection
         const lib = PhraseLibrary[dom];
         const pick = (arr) => arr[Math.floor(Math.random() * arr.length)];
         
-        const insight = pick(lib.dominant_insight);
-        const support = pick(lib.supporting_tension[sec] || lib.supporting_tension[fra]);
-        const warning = pick(lib.fragile_warning[fra] || lib.fragile_warning[sec]);
-        const designQ = pick(lib.design_question[fra] || lib.design_question[sec] || lib.design_question[dom]);
+        const ins = pick(lib.dominant_insight);
+        const sup = pick(lib.supporting_tension[sec] || lib.supporting_tension[fra]);
+        const war = pick(lib.fragile_warning[fra] || lib.fragile_warning[sec]);
+        const q = pick(lib.design_question[fra] || lib.design_question[sec] || lib.design_question[dom]);
 
-        document.getElementById('assess-box').innerHTML = `At the moment, ${insight} In this context, ${support} This means ${warning}`;
-        document.getElementById('prompt-box').innerText = designQ;
+        document.getElementById('assess-box').innerHTML = `At the moment, ${ins} In this context, ${sup} This means ${war}`;
+        document.getElementById('prompt-box').innerText = q;
 
         document.getElementById('reflection').style.display = 'block';
         window.scrollTo({ top: document.getElementById('reflection').offsetTop - 50, behavior: 'smooth' });
