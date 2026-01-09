@@ -399,16 +399,16 @@
 </div>
 
 <script>
-    const PhraseLibrary = {
+  const PhraseLibrary = {
         speed: {
             dominant_insight: ["Momentum is being used to resolve uncertainty.", "Decisions are landing before their implications are shared.", "Velocity is substituting for alignment.", "The pace of delivery is outstripping the pace of sense-making.", "Speed is collapsing discussion into execution.", "Urgency is setting the tone of the conversation."],
             supporting_tension: { 
-                trust: ["Trust will need to be signaled quickly, not clarified later.", "There is little tolerance for revision once this moves.", "Misalignment will be noticed immediately, not gradually.", "Interpretation risk rises as explanation time disappears."], 
+                trust: ["Trust must be signaled quickly rather than clarified later.", "There is little tolerance for revision once this moves.", "Misalignment will be noticed immediately rather than gradually.", "Interpretation risk rises as explanation time disappears."], 
                 coherence: ["Narrative continuity is being asked to keep up with delivery.", "Meaning must travel faster than usual to hold.", "Context risks lagging behind output."] 
             },
             fragile_warning: { 
-                coherence: ["Coherence is the fragile constraint.", "Meaning risks fragmenting as delivery accelerates.", "The work may accumulate noise instead of direction."], 
-                trust: ["Trust will hold only if signals are unambiguous.", "Small inconsistencies carry outsized weight."] 
+                coherence: ["Coherence becomes vulnerable as the pace of delivery outruns the shared logic required to sustain it.", "Meaning risks fragmenting as delivery accelerates.", "The work tends to accumulate noise instead of direction when velocity overrides intent."], 
+                trust: ["Trust acts as the fragile constraint when speed narrows the margin for perceived authenticity.", "Small inconsistencies carry outsized weight when there is no time for context."] 
             },
             design_question: { 
                 coherence: ["What needs to be named now so it does not need explaining later?", "What is the smallest narrative signal that would align interpretation?"], 
@@ -416,14 +416,14 @@
             }
         },
         trust: {
-            dominant_insight: ["Interpretation risk outweighs delivery risk.", "This decision will be judged contextually, not technically.", "Perception matters more than intent.", "Credibility is being carried by small signals.", "Meaning will be inferred, not explained.", "This work will be read between the lines."],
+            dominant_insight: ["Interpretation risk outweighs delivery risk.", "This decision will be judged contextually rather than technically.", "Perception matters more than intent.", "Credibility is being carried by small signals.", "Meaning will be inferred rather than explained.", "This work will be read between the lines."],
             supporting_tension: { 
                 speed: ["There is limited tolerance for post-release clarification.", "Timing shapes interpretation as much as content.", "Moving quickly narrows the margin for correction.", "Acceleration amplifies scrutiny rather than bypassing it."], 
-                coherence: ["Narrative shortcuts will be noticed.", "Inconsistencies will be interpreted as intent.", "Context must be carried explicitly, not assumed."] 
+                coherence: ["Narrative shortcuts will be noticed.", "Inconsistencies will be interpreted as intent.", "Context must be carried explicitly rather than assumed."] 
             },
             fragile_warning: { 
-                coherence: ["Coherence is the fragile constraint.", "Small narrative gaps invite unintended interpretations.", "Trust erodes quietly rather than breaking visibly."], 
-                speed: ["Speed is the fragile constraint.", "Urgency may narrow options later rather than expand them."] 
+                coherence: ["Coherence is the fragile constraint, as small narrative gaps often invite unintended interpretations.", "Meaning erodes quietly rather than breaking visibly when the logic is not explicitly grounded.", "The long-term signal becomes vulnerable if the work appears reactive rather than intentional."], 
+                speed: ["Speed acts as the fragile constraint when heightened scrutiny creates a narrow window for corrective action.", "Urgency may narrow options later rather than expand them if the initial reception is volatile."] 
             },
             design_question: { 
                 coherence: ["What story does this decision tell when placed alongside previous ones?", "What context must travel with the work to prevent misreading?"], 
@@ -431,14 +431,14 @@
             }
         },
         coherence: {
-            dominant_insight: ["This decision is being made in relation to a larger system.", "The work is being asked to accumulate meaning over time.", "Continuity is doing more work here than novelty.", "This choice will be read as precedent, not an isolated act.", "The integrity of the system matters more than the impact of this moment.", "The long arc is shaping what can happen now."],
+            dominant_insight: ["This decision is being made in relation to a larger system.", "The work is being asked to accumulate meaning over time.", "Continuity is doing more work here than novelty.", "This choice will be read as precedent rather than an isolated act.", "The integrity of the system matters more than the impact of this moment.", "The long arc is shaping what can happen now."],
             supporting_tension: { 
                 speed: ["Acceleration risks outrunning shared understanding.", "Moving quickly may fracture continuity.", "Pacing matters more than velocity here.", "Urgency could introduce inconsistency."], 
-                trust: ["Trust depends on consistency rather than explanation.", "Credibility accrues through alignment, not reassurance.", "Small deviations may weaken the overall signal.", "Reliability is being inferred across time."] 
+                trust: ["Trust depends on consistency rather than explanation.", "Credibility accrues through alignment rather than reassurance.", "Small deviations may weaken the overall signal.", "Reliability is being inferred across time."] 
             },
             fragile_warning: { 
-                speed: ["Speed is the fragile constraint.", "Momentum could introduce breaks that are difficult to reconcile later."], 
-                trust: ["Trust is the fragile constraint.", "Consistency may appear performative rather than lived."] 
+                speed: ["Speed acts as the fragile constraint when the need for alignment stalls the momentum of production.", "Momentum could introduce breaks that are difficult to reconcile with the existing system later.", "The ability to react quickly is compromised by the requirement for systemic continuity."], 
+                trust: ["Trust becomes the fragile constraint if the systemic continuity feels engineered rather than emerging from lived context.", "Reliability erodes if the consistency appears performative rather than authentic.", "The shared understanding becomes vulnerable if the narrative feels forced rather than felt."] 
             },
             design_question: { 
                 speed: ["What pace preserves continuity without stalling progress?", "What would be difficult to undo if we move too quickly?"], 
@@ -493,23 +493,54 @@
             l.setAttribute('opacity', i === 2 ? 0.65 : 1);
         });
 
-      const lib = PhraseLibrary[dom];
+     const lib = PhraseLibrary[dom];
         const pick = (arr) => arr ? arr[Math.floor(Math.random() * arr.length)] : null;
         
-        // 1. Pick phrases
-        const ins = pick(lib.dominant_insight);
-        const sup = pick(lib.supporting_tension[sec] || lib.supporting_tension[fra]);
-        const war = pick(lib.fragile_warning[fra] || lib.fragile_warning[sec]);
+        // Pick phrases from library
+        let s1 = pick(lib.dominant_insight);
+        let s2 = pick(lib.supporting_tension[sec] || lib.supporting_tension[fra]);
+        let s3 = pick(lib.fragile_warning[fra] || lib.fragile_warning[sec]);
         
-        // 5. Design Question Targeting: Priority to Fragile Constraint
-        const q = pick(lib.design_question[fra]) || pick(lib.design_question[sec]) || pick(lib.design_question[dom]);
+        // Lexical De-duplication
+        const synonyms = {
+            "context": ["framing", "environment", "setting"],
+            "meaning": ["alignment", "intent", "shared understanding"],
+            "trust": ["credibility", "perceived authenticity", "reliability"],
+            "interpretation": ["reading", "reception", "perception"]
+        };
 
-        // 1. Single Context Frame Rule & 2. Independent Sentences
-        // If the insight is long/established, we don't frame it. 
-        // We use one frame for the second sentence to bridge the tension.
-        const sentence1 = ins.endsWith('.') ? ins : ins + '.';
-        const sentence2 = "In this context, " + lowerFirst(sup.endsWith('.') ? sup : sup + '.');
-        const sentence3 = war.endsWith('.') ? war : war + '.';
+        const deduplicate = (text, checkAgainst) => {
+            Object.keys(synonyms).forEach(word => {
+                const regex = new RegExp(`\\b${word}\\b`, 'gi');
+                if (checkAgainst.toLowerCase().includes(word) && text.toLowerCase().includes(word)) {
+                    const replacement = pick(synonyms[word]);
+                    text = text.replace(regex, replacement);
+                }
+            });
+            return text;
+        };
+
+        s2 = deduplicate(s2, s1);
+        s3 = deduplicate(s3, s1 + " " + s2);
+
+        // Context Phrase Variation
+        const frames = ["At the moment, ", "In this context, ", ""];
+        const frameChoice = Math.floor(Math.random() * 4); // 0, 1, 2, or 3 (omitted)
+
+        if (frameChoice === 0) {
+            s1 = frames[0] + lowerFirst(s1);
+        } else if (frameChoice === 1) {
+            s2 = frames[1] + lowerFirst(s2);
+        }
+
+        // Sentence 3: Dynamic Fragile Relationship
+        // Ensuring it names the constraint and describes the erosion dynamic
+        const sentence1 = s1.endsWith('.') ? s1 : s1 + '.';
+        const sentence2 = s2.endsWith('.') ? s2 : s2 + '.';
+        const sentence3 = s3.endsWith('.') ? s3 : s3 + '.';
+
+        // Design Question: Priority to Fragile
+        const q = pick(lib.design_question[fra]) || pick(lib.design_question[sec]) || pick(lib.design_question[dom]);
 
         document.getElementById('assess-box').innerHTML = `${sentence1} ${sentence2} ${sentence3}`;
         document.getElementById('prompt-box').innerText = q;
